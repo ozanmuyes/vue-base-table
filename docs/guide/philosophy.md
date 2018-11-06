@@ -1,0 +1,3 @@
+# Philosophy
+
+There are many many other table components exist on the npm. So why bother to come up with a new one? Especially it requires more work to catch-up with the others? ...

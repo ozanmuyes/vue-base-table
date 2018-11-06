@@ -1,0 +1,6 @@
+* package.json is for the plugin/library
+* rollup config de CJS module yapısının seçilmesinin nedeni rollup'ın node ortamında çalıştığının altını çizmek.
+* build script on package.json subject to be changed per project. if you want to add browser support
+  (i.e. IIFE support) add "& npm run build:iife" to the build script, or if you don't want to
+  support Node.js (i.e. no CJS output) remove " & npm run build:cjs"
+*

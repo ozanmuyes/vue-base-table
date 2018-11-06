@@ -1,0 +1,104 @@
+<!-- NOTE This SHOULD be excluded everywhere (i.e. git, npm) -->
+<!-- NOTE Copy and paste to jsfiddle etc. -->
+
+<script src="https://unpkg.com/vue@2.5.17"></script>
+<script>
+// Paste the contents of 'dist/[PLUGIN_NAME].min.js' here
+</script>
+
+<script>
+/*var MyRow = Vue.component('my-row', {
+  template: `<tr>
+    <td>sta</td>
+    <td>{{ row.uid }}</td>
+    <!-- <td
+      v-for="info in row.data"
+      :key="info">{{ info }}</td> -->
+    <td>fin</td>
+  </tr>`,
+  mixins: [VueBaseTable.RowMixin],
+  created() {
+    console.log(this.row);
+  },
+});*/
+var MyRow = {
+  template: `<tr>
+    <td>sta</td>
+    <td>{{ row.uid }}</td>
+    <td
+      v-for="info in row.data"
+      :key="info">{{ info }}</td>
+    <td>fin</td>
+  </tr>`,
+  mixins: [VueBaseTable.RowMixin],
+};
+
+Vue.component('slot-head-table', {
+  template: `<table>
+    <base-table-head :columns="normalizedColumns">
+      <template slot="left">
+        <th>START</th>
+        <th>#</th>
+      </template>
+
+      <template slot="right">
+        <th>FIN</th>
+      </template>
+    </base-table-head>
+
+    <!-- <component :is="rowComponent"></component> -->
+    <base-table-body
+      :rows="data"
+      :map="dataMap"
+      :row-component="rowComponent"
+    />
+  </table>`,
+  /*components: {
+    BaseTableHead,
+    BaseTableBody,
+  },*/
+  mixins: [VueBaseTable.TableMixin],
+  computed: {
+    rowComponent: () => MyRow,
+  },
+});
+</script>
+
+<div id="app">
+  <slot-head-table :columns="columns" :data="data"/>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    columns: [
+      { title: 'First Name', sortable: true },
+      'Last Name',
+      'Instrument',
+    ],
+    data: [
+      {
+        firstName: 'John',
+        lastName: 'Lennon',
+        instrument: 'Rhythm Guitar',
+      },
+      {
+        firstName: 'Paul',
+        lastName: 'McCartney',
+        instrument: 'Bass',
+      },
+      {
+        firstName: 'George',
+        lastName: 'Harrison',
+        instrument: 'Lead Guitar',
+      },
+      {
+        firstName: 'Ringo',
+        lastName: 'Starr',
+        instrument: 'Drums',
+      },
+    ],
+  }
+});
+</script>
